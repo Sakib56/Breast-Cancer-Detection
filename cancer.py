@@ -1,5 +1,7 @@
-import numpy as np
 import knn
+import math
+from random import shuffle
+import numpy as np
 
 def loadData():
     with open("data.csv") as dataCSV:
@@ -18,12 +20,37 @@ def loadData():
 
         return data
 
+def crossValidate(data, trainSize=0.8):
+    shuffle(data["B"])
+    shuffle(data["M"])
+
+    trainingData = {"B": [], "M": []}
+    testingData = {"B": [], "M": []}
+
+    for diagnosis in ["M","B"]:
+        size = int(len(data[diagnosis])*trainSize)
+        trainingData[diagnosis] = data[diagnosis][:size]
+        testingData[diagnosis] = data[diagnosis][size:]
+
+    return trainingData, testingData
+
+
+
 ### MAIN ###
 dataset = loadData()
 knn = knn.KNearestNeighbor()
 
-diagnosis = "M"
+trainingData, testingData = crossValidate(dataset, trainSize=0.8)
 
-for i in range(len(dataset[diagnosis])):
-    example = dataset[diagnosis][i]
-    print(knn.predict(dataset, example, k=5))
+for k in [k for k in range(1,20,3)]:
+    for diagnosis in ["M","B"]:
+        correct = 0
+        total = len(testingData[diagnosis])
+        for i in range(total):
+            example = testingData[diagnosis][i]
+            if knn.predict(trainingData, example, k=k) == diagnosis:
+                correct += 1
+
+        print("K={0}, {1}, accuracy: {2}%".format(k, diagnosis, 100*correct/total))
+    print("\n")
+
