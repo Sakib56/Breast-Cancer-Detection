@@ -1,7 +1,6 @@
 import knn
 import math
 from random import shuffle
-import numpy as np
 
 def loadData():
     with open("data.csv") as dataCSV:
@@ -34,23 +33,29 @@ def crossValidate(data, trainSize=0.8):
 
     return trainingData, testingData
 
+def bruteForceBestHyperParams(diagnosis):
+    hyperParams = []
+    for sizes in [s*0.1 for s in range(1,10)]:
+        trainingData, testingData = crossValidate(dataset, trainSize=sizes)
+
+        for k in [k for k in range(1,21)]:
+            correct = 0
+            total = len(testingData[diagnosis])
+
+            for i in range(total):
+                example = testingData[diagnosis][i]
+                if knn.predict(trainingData, example, k=k) == diagnosis: correct += 1
+            hyperParams.append((100*correct/total,sizes,k))
+        #         print("K={0}, ans: {1}, trainSize: {2}, accuracy: {3:.4f}%".format(k, diagnosis, sizes, 100*correct/total))
+        # print("\n")
+    hyperParams.sort(key=lambda tup: tup[0])
+    return hyperParams
+
 
 
 ### MAIN ###
 dataset = loadData()
 knn = knn.KNearestNeighbor()
 
-trainingData, testingData = crossValidate(dataset, trainSize=0.8)
-
-for k in [k for k in range(1,20,3)]:
-    for diagnosis in ["M","B"]:
-        correct = 0
-        total = len(testingData[diagnosis])
-        for i in range(total):
-            example = testingData[diagnosis][i]
-            if knn.predict(trainingData, example, k=k) == diagnosis:
-                correct += 1
-
-        print("K={0}, {1}, accuracy: {2}%".format(k, diagnosis, 100*correct/total))
-    print("\n")
-
+for params in bruteForceBestHyperParams("M"):
+    print(params)
