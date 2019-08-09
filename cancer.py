@@ -1,7 +1,7 @@
 import knn
-import math
 from random import shuffle
 
+# loads data from data.csv into the correct format (dictionary) for my knn
 def loadData():
     with open("data.csv") as dataCSV:
         data = {"B": [], "M": []}
@@ -19,6 +19,7 @@ def loadData():
 
         return data
 
+# shuffles & splits data into two smaller datasets for training & testing
 def crossValidate(data, trainSize=0.8):
     shuffle(data["B"])
     shuffle(data["M"])
@@ -26,36 +27,39 @@ def crossValidate(data, trainSize=0.8):
     trainingData = {"B": [], "M": []}
     testingData = {"B": [], "M": []}
 
-    for diagnosis in ["M","B"]:
+    for diagnosis in ["M", "B"]:
         size = int(len(data[diagnosis])*trainSize)
         trainingData[diagnosis] = data[diagnosis][:size]
         testingData[diagnosis] = data[diagnosis][size:]
 
     return trainingData, testingData
 
+# uses a brute force approach to find the best hyperparamters for k and trainSize
 def bruteForceBestHyperParams(diagnosis):
     hyperParams = []
-    for sizes in [s*0.1 for s in range(1,10)]:
-        trainingData, testingData = crossValidate(dataset, trainSize=sizes)
-
-        for k in [k for k in range(1,21)]:
+    for sizes in [s*0.1 for s in range(4, 9)]:
+        for k in [k for k in range(1, 15)]:
+            trainingData, testingData = crossValidate(dataset, trainSize=sizes)
             correct = 0
             total = len(testingData[diagnosis])
 
             for i in range(total):
                 example = testingData[diagnosis][i]
-                if knn.predict(trainingData, example, k=k) == diagnosis: correct += 1
-            hyperParams.append((100*correct/total,sizes,k))
-        #         print("K={0}, ans: {1}, trainSize: {2}, accuracy: {3:.4f}%".format(k, diagnosis, sizes, 100*correct/total))
-        # print("\n")
-    hyperParams.sort(key=lambda tup: tup[0])
-    return hyperParams
+                if knn.predict(trainingData, example, k=k) == diagnosis:
+                    correct += 1
+            hyperParams.append((100*correct/total, sizes, k))
 
+    hyperParams.sort(key=lambda t: t[0])
+    return hyperParams
 
 
 ### MAIN ###
 dataset = loadData()
 knn = knn.KNearestNeighbor()
 
-for params in bruteForceBestHyperParams("M"):
-    print(params)
+trainingData, testingData = crossValidate(dataset, trainSize=0.65)
+print("average accuracy: {0:.5f}%".format(100*knn.getScore(trainingData, testingData, 7)))
+
+# hyperParams = bruteForceBestHyperParams("M")
+# bestParam = [sum(params) / len(params) for params in zip(*hyperParams[-20:])]
+# print("avgAcc: {2:.4f}, trainSize: {0:.2f}, K: {1}".format(bestParam[1], int(bestParam[2]), bestParam[0]))
