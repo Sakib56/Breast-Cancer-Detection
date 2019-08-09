@@ -8,7 +8,7 @@ This file current contains two methods.
 
 *data* is the training data i.e. an n by m matrix of row vectors (which are the datapoints),
 
-*sample* is a single row vector i.e. 1 by m
+*sample* is a single row vector (1 by m)
 
 and *k* is the number of nearest neighbours the algorithm will consider before classifying sample.
 
@@ -20,7 +20,7 @@ first I start off by loading the data from the .csv into a dictionary using the 
 
 ```{"B": [b1, b2, ..., bn], "M": [m1, m2, ..., mn]}``` where bn or mn for any n, is a 30 dimensional list (vector). 
 
-*Note: it is 30D instead of 32D as I have removed the "id" and "diagnosis" columns within loadData()*
+*Note: it is 30-D instead of 32-D as I have removed the "id" and "diagnosis" columns within loadData()*
 
 #### Cross-Validating the Data
 As we have a finite dataset, we can not use all of the dataset to "train" KNN, instead we will cross-validate. This is essentially shuffling the data and splitting into two groups (in my case).
