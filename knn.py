@@ -2,7 +2,7 @@ import numpy as np
 from collections import Counter
 
 
-class KNearestNeighbor():
+class KNearestNeighbour():
     def __init__(self, *args, **kwargs):
         return super().__init__(*args, **kwargs)
 
@@ -19,6 +19,7 @@ class KNearestNeighbor():
 
         return verdict
 
+    # tests knn using training and testing data and returns a percentage
     def getScore(self, trainingData, testingData, k):
         avgAcc = 0
         for diagnosis in ["M", "B"]:

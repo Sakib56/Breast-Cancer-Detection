@@ -55,10 +55,14 @@ def bruteForceBestHyperParams(diagnosis):
 
 ### MAIN ###
 dataset = loadData()
-knn = knn.KNearestNeighbor()
+knn = knn.KNearestNeighbour()
 
+# from testing best hyperparameters seem to be K = 7 and trainSize = 0.65
 trainingData, testingData = crossValidate(dataset, trainSize=0.65)
-print("average accuracy: {0:.5f}%".format(100*knn.getScore(trainingData, testingData, 7)))
+k = 7
+score = 100*knn.getScore(trainingData, testingData, k)
+
+print("average accuracy: {0:.5f}%".format(score))
 
 # hyperParams = bruteForceBestHyperParams("M")
 # bestParam = [sum(params) / len(params) for params in zip(*hyperParams[-20:])]
