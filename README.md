@@ -1,10 +1,11 @@
 # Breast Cancer Diagnosis w/ K-Nearest Neighbours
+(README WIP)
 
 This is my approach at implementing **KNN from scratch** and applying it to the **Breast Cancer Wisconsin (Diagnostic) dataset**, provided by [Kaggle](https://www.kaggle.com/uciml/breast-cancer-wisconsin-data)
 
 ## knn.py
-This file current contains two methods.
-**knn.predict(data, sample, k=n)** where...
+This file currently contains two methods.
+**knn.predict(data, sample, k=n)** where the arguments...
 
 *data* is the training data i.e. an n by m matrix of row vectors (which are the datapoints),
 
@@ -23,7 +24,7 @@ first I start off by loading the data from the .csv into a dictionary using the 
 *Note: it is 30-D instead of 32-D as I have removed the "id" and "diagnosis" columns within loadData()*
 
 #### Cross-Validating the Data
-As we have a finite dataset, we can not use all of the dataset to "train" KNN, instead we will cross-validate. This is essentially shuffling the data and splitting into two groups (in my case).
+As I have a finite dataset, I can not use all of the dataset to "train" KNN, instead I will cross-validate. This is essentially shuffling the data and splitting into two groups (in my case).
 
 The reason this is done is because, I used all of the dataset to train and test my model, it would get a higher accuracy compared to unseen data points (as there will always be one training point exactly on the testing point)
 
