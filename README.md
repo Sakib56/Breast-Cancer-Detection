@@ -1,4 +1,4 @@
-# Breast Cancer Diagnosis w/ K-Nearest Neighbours
+# Breast Cancer Detection w/ K-Nearest Neighbours
 (README WIP)
 
 This is my approach at implementing **KNN from scratch** and applying it to the **Breast Cancer Wisconsin (Diagnostic) dataset**, provided by [Kaggle](https://www.kaggle.com/uciml/breast-cancer-wisconsin-data)
