@@ -33,7 +33,7 @@ trainingData, testingData = crossValidate(dataset, trainSize=0.6)
 ```
 let's assume that ```dataset``` had 100 vectors, then ```trainingData``` and ```testingData``` would have 60 and 40 vectors, respectively. *Note: trainingData and testingData are disjoint (share no common elements)*
 
-#### bruteForceBestHyperParams
+#### Finding the best hyper-parameters (K and trainSize)
 
 ## knn.py
 #### Predicting a new sample given data
@@ -47,7 +47,7 @@ let's assume that ```dataset``` had 100 vectors, then ```trainingData``` and ```
 
 for example, predicting what the first value of testingData["M"] (for malignant class) will be: 
 ```python
-knn.predict(trainingData, testingData["M"][0], k=k)
+knn.predict(trainingData, testingData["M"][0], k=7)
 >> "M"
 ```
 
