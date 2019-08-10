@@ -5,6 +5,7 @@ This is my approach at implementing **KNN from scratch** and applying it to the 
 
 ## knn.py
 This file currently contains two methods.
+#### Predicting a new sample given data
 **knn.predict(data, sample, k=n)** is used to predict what class (benign/malignant) sample will be, based on *data* - the other data points around it. where the arguments...
 
 *data* is the training data, a matrix of row vectors which are the datapoints (n by m),
@@ -13,9 +14,12 @@ This file currently contains two methods.
 
 *k* is the number of nearest neighbours the algorithm will consider before classifying *sample*.
 
+#### Finding the Accuracy
 **getScore(trainingData, testingData, k)** is used to calculate the accuracy of the model. This is done by inputing *trainingData* and *testingData* and a value for *k*. This method is similar to predict, the difference being that a *testingData* is also a matrix of row vectors instead of a single row vector and a percentage (between 0-1) is returned.
 
 Ideally *trainingData* and *testingData* should be cross-validated from the original dataset.
+
+*Note: by "accuracy" I mean (number of correct diagnoses)/(total number of cases)*
 
 ## cancer.py
 This is where all of the magic happens...
@@ -28,9 +32,14 @@ first I start off by loading the data from the .csv into a dictionary using the 
 *Note: it is 30-D instead of 32-D as I have removed the "id" and "diagnosis" columns within loadData()*
 
 #### Cross-Validating the Data
-As I have a finite dataset, I can not use all of the dataset to "train" KNN, instead I will cross-validate. This is essentially shuffling the data and splitting into two groups (in my case).
+As I have a finite dataset to work with, I can not use all of the dataset to "train" KNN, instead I will cross-validate. This is essentially shuffling the data and splitting into two groups, one for training purposes and another for testing. Think of it like a studying a pastpaper versus doing a final exam.
 
-The reason this is done is because, I used all of the dataset to train and test my model, it would get a higher accuracy compared to unseen data points (as there will always be one training point exactly on the testing point)
+The reason this is done is because, if I used all of the dataset to train and test my model, it would get a higher accuracy compared to unseen data points (as there will always be one training point exactly on the testing point)... You wouldn't give your student a final exam which was the same as a pastpaper.
+
+**crossValidate(data, trainSize=0.8)** is used to do this cross-validation,
+
+
+#### bruteForceBestHyperParams
 
 ## data.csv
 
