@@ -7,7 +7,12 @@ This is my approach at implementing **KNN from scratch** and applying it to the 
 #### Loading the Data from .csv
 first I start off by loading the data from the .csv into a dictionary using the **loadData()** function. What is returned will look something like this:
 
-```{"B": [b1, b2, ..., bn], "M": [m1, m2, ..., mn]}``` where bn or mn for any n, is a 30 dimensional list (vector). 
+```{"B": [b1, b2, ..., bn], "M": [m1, m2, ..., mn]}``` where bn or mn for any n, is a 30 dimensional list (vector).
+
+for example, loading the data into the format shown above: 
+```python
+dataset = loadData()
+```
 
 *Note: it is 30-D instead of 32-D as I have removed the "id" and "diagnosis" columns within loadData()*
 
@@ -22,7 +27,7 @@ The reason this is done is because, if I used all of the dataset to train and te
 
 *trainSize* is the percentage of *data* which is set aside for training
 
-for example: 
+for example, creating two datasets for training and testing: 
 ```python
 trainingData, testingData = crossValidate(dataset, trainSize=0.6)
 ```
@@ -39,6 +44,12 @@ let's assume that ```dataset``` had 100 vectors, then ```trainingData``` and ```
 *sample* is a single row vector (1 by m) and
 
 *k* is the number of nearest neighbours the algorithm will consider before classifying *sample*.
+
+for example, predicting what the first value of testingData["M"] (for malignant class) will be: 
+```python
+knn.predict(trainingData, testingData["M"][0], k=k)
+>> "M"
+```
 
 #### Finding the Accuracy
 **getScore(trainingData, testingData, k)** is used to calculate the accuracy of the model. This is done by inputing *trainingData* and *testingData* and a value for *k*. This method is similar to predict, the difference being that a *testingData* is also a matrix of row vectors instead of a single row vector and a percentage (between 0-1) is returned.
