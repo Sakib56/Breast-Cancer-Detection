@@ -19,8 +19,14 @@ score = 100*knn.getScore(trainingData, testingData, k)
 
 print("average accuracy: {0:.5f}%".format(score))
 ```
+This will:
+* load the dataset from data.csv
+* cross validate the data, creating a training and testing set
+* initialise a new KNN model 
+* test KNN on the testing set given the training set
+* outputing the average accuracy
 
-Feel free to remove this code and mess around with the methods!
+*Feel free to remove this code and mess around with the methods!*
 
 ## cancer.py
 #### Loading the Data from .csv
@@ -53,6 +59,29 @@ trainingData, testingData = crossValidate(dataset, trainSize=0.6)
 let's assume that ```dataset``` had 100 vectors, then ```trainingData``` and ```testingData``` would have 60 and 40 vectors, respectively. *Note: trainingData and testingData are disjoint (share no common elements) *
 
 #### Finding the best hyper-parameters (K and trainSize)
+This is a completely inefficient way to find the best hyper parameters for the model. bruteForceBestHyperParams(diagnosis) where diagnosis is “M” or “B”.
+
+This method will run through values of trainSize from 0.4 to 0.9 for cross validation,
+
+Each time it will also run through values of k from 1 to 15. 
+
+Randomising the dataset and running KNN to create a list of accuracies and hyper parameters.
+
+The basic pseudocode is:
+```python
+BestParameters = []
+For trainSizes from 0.4 to 0.9
+	For k from 1 to 15
+		Randomise dataset
+		Get accuracy 
+		BestParameters += (accuracy, trainSizes, k)
+    
+Sort BestParameters by accuracy
+Return BestParameters
+```
+
+From doing this and collating the results, I have concluded that the best results from my KNN can be achieved by using a 
+**trainSize ≈ 0.6** and **k ≈ 7**
 
 ## knn.py
 #### Predicting a new sample given data
@@ -76,5 +105,3 @@ knn.predict(trainingData, testingData["M"][0], k=7)
 Ideally *trainingData* and *testingData* should be cross validated from the original dataset.
 
 *Note: by "accuracy" I mean (number of correct diagnoses)/(total number of cases)*
-
-## data.csv
