@@ -1,5 +1,4 @@
 # Breast Cancer Detection w/ K-Nearest Neighbours
-(README WIP)
 
 This is my approach at implementing **KNN from scratch** and applying it to the **Breast Cancer Wisconsin (Diagnostic) dataset**, provided by the [UCI Machine Learning Repository](https://archive.ics.uci.edu/ml/datasets/Breast+Cancer+Wisconsin+%28Diagnostic%29)
 
@@ -28,6 +27,8 @@ This will:
 
 *Feel free to remove this code and mess around with the methods!*
 
+
+
 ## cancer.py
 #### Loading the Data from .csv
 First, I start off by loading the data from the .csv into a dictionary using the **loadData()** function. What is returned will look something like this:
@@ -39,7 +40,7 @@ for example, loading the data into the format shown above:
 dataset = loadData()
 ```
 
-*Note: it is 30-D instead of 32-D as I have removed the "id" and "diagnosis" columns within loadData()*
+###### *Note: it is 30-D instead of 32-D as I have removed the "id" and "diagnosis" columns within loadData()*
 
 #### Cross Validating the Data
 As I have a finite dataset to work with, I cannot use all of the dataset to "train" KNN, instead I will cross-validate. This is essentially shuffling the data and splitting into two groups, one for training purposes and another for testing. Think of it like a studying a past paper versus doing a final exam.
@@ -56,7 +57,8 @@ for example, creating two datasets for training and testing:
 ```python
 trainingData, testingData = crossValidate(dataset, trainSize=0.6)
 ```
-let's assume that ```dataset``` had 100 vectors, then ```trainingData``` and ```testingData``` would have 60 and 40 vectors, respectively. *Note: trainingData and testingData are disjoint (share no common elements) *
+let's assume that ```dataset``` had 100 vectors, then ```trainingData``` and ```testingData``` would have 60 and 40 vectors, respectively.
+###### *Note: trainingData and testingData are disjoint (share no common elements)*
 
 #### Finding the best hyper-parameters (K and trainSize)
 This is a completely inefficient way to find the best hyper parameters for the model. bruteForceBestHyperParams(diagnosis) where diagnosis is “M” or “B”.
@@ -104,4 +106,4 @@ knn.predict(trainingData, testingData["M"][0], k=7)
 
 Ideally *trainingData* and *testingData* should be cross validated from the original dataset.
 
-*Note: by "accuracy" I mean (number of correct diagnoses)/(total number of cases)*
+###### *Note: by "accuracy" I mean (number of correct diagnoses)/(total number of cases)*
