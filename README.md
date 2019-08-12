@@ -44,9 +44,9 @@ Type "help", "copyright", "credits" or "license" for more information.
 >>>
 >>> print("average accuracy: {0:.5f}%".format(score))
 >>>
->>> accuracy for M diagnosis: 91.33%
->>> accuracy for B diagnosis: 96.80%
->>> average accuracy: 94.06500%
+>>> "accuracy for M diagnosis: 91.33%"
+>>> "accuracy for B diagnosis: 96.80%"
+>>> "average accuracy: 94.06500%"
 ```
 
 *Feel free to remove this code and mess around with the methods!*
