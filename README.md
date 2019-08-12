@@ -27,20 +27,18 @@ This will:
 
 *Feel free to remove this code and mess around with the methods!*
 
-
-
 ## cancer.py
 #### Loading the Data from .csv
-First, I start off by loading the data from the .csv into a dictionary using the **loadData()** function. What is returned will look something like this:
+First, I start off by loading the data from the .csv using the **loadData()** function. What is returned will look something like this:
 
 {"B": [b1, b2, ..., bn], "M": [m1, m2, ..., mn]} where bn or mn for any n, is a 30 dimensional list (vector).
+
+###### *Note: it is 30-D instead of 32-D as I have removed the "id" and "diagnosis" columns within loadData()*
 
 for example, loading the data into the format shown above: 
 ```python
 dataset = loadData()
 ```
-
-###### *Note: it is 30-D instead of 32-D as I have removed the "id" and "diagnosis" columns within loadData()*
 
 #### Cross Validating the Data
 As I have a finite dataset to work with, I cannot use all of the dataset to "train" KNN, instead I will cross-validate. This is essentially shuffling the data and splitting into two groups, one for training purposes and another for testing. Think of it like a studying a past paper versus doing a final exam.
@@ -51,7 +49,7 @@ The reason this is done is because, if I used all the dataset to train and test 
 
 *data* is the training data, a matrix of row vectors which are the datapoints (n by m) and
 
-*trainSize* is the percentage of *data* which is set aside for training
+*trainSize* is the percentage of *data* which is set aside for training (default being 0.8)
 
 for example, creating two datasets for training and testing: 
 ```python
@@ -61,7 +59,7 @@ let's assume that ```dataset``` had 100 vectors, then ```trainingData``` and ```
 ###### *Note: trainingData and testingData are disjoint (share no common elements)*
 
 #### Finding the best hyper-parameters (K and trainSize)
-This is a completely inefficient way to find the best hyper parameters for the model. bruteForceBestHyperParams(diagnosis) where diagnosis is “M” or “B”.
+This is a completely inefficient way to find the best hyper parameters for the model. **bruteForceBestHyperParams(diagnosis)** where *diagnosis* is “M” or “B”.
 
 This method will run through values of trainSize from 0.4 to 0.9 for cross validation,
 
@@ -70,24 +68,24 @@ Each time it will also run through values of k from 1 to 15.
 Randomising the dataset and running KNN to create a list of accuracies and hyper parameters.
 
 The basic pseudocode is:
-```python
+```
 BestParameters = []
 For trainSizes from 0.4 to 0.9
 	For k from 1 to 15
 		Randomise dataset
 		Get accuracy 
 		BestParameters += (accuracy, trainSizes, k)
-    
+		
 Sort BestParameters by accuracy
 Return BestParameters
 ```
 
 From doing this and collating the results, I have concluded that the best results from my KNN can be achieved by using a 
-**trainSize ≈ 0.6** and **k ≈ 7**
+**trainSize ≈ 0.63** and **k ≈ 7**
 
 ## knn.py
 #### Predicting a new sample given data
-**knn.predict(data, sample, k=n)** is used to predict what class (benign/malignant) sample will be, based on *data* - the other data points around it. where the arguments...
+**knn.predict(data, sample, k=n)** is used to predict what class (benign/malignant) *sample*m will be, based on *data* - the other data points around it. where the arguments...
 
 *data* is the training data, a matrix of row vectors which are the datapoints (n by m),
 
