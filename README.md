@@ -34,22 +34,22 @@ Type "help", "copyright", "credits" or "license" for more information.
 >>>
 >>> import knn
 >>> import cancer
->>>
+
 >>> dataset = cancer.loadData()
 >>> trainingData, testingData = cancer.crossValidate(dataset, trainSize=0.65)
->>>
+
 >>> k = 7
 >>> knn = knn.KNearestNeighbour()
 >>> score = 100*knn.getScore(trainingData, testingData, k)
->>>
+
 >>> print("average accuracy: {0:.5f}%".format(score))
->>>
->>> "accuracy for M diagnosis: 91.33%"
->>> "accuracy for B diagnosis: 96.80%"
->>> "average accuracy: 94.06500%"
+
+"accuracy for M diagnosis: 91.33%"
+"accuracy for B diagnosis: 96.80%"
+"average accuracy: 94.06500%"
 ```
 
-*Feel free to remove this code and mess around with the methods!*
+###### *Feel free to remove this code and mess around with the methods!*
 
 ## cancer.py
 #### Loading the Data from .csv
@@ -67,7 +67,7 @@ dataset = loadData()
 #### Cross Validating the Data
 As I have a finite dataset to work with, I cannot use all of the dataset to "train" KNN, instead I will cross-validate. This is essentially shuffling the data and splitting into two groups, one for training purposes and another for testing. Think of it like a studying a past paper versus doing a final exam.
 
-The reason this is done is because, if I used all the dataset to train and test my model, it would get a higher accuracy compared to unseen data points (as there will always be one training point exactly on the testing point) ... You wouldn't give your student a final exam which was the same as a past paper.
+The reason this is done is because if I used all the dataset to train and test my model, it would get a higher accuracy compared to unseen data points (as there will always be one training point exactly on the testing point) ... You wouldn't give your student a final exam which was the same as a past paper.
 
 **crossValidate(data, trainSize=0.8)** is used to do this cross-validation, which returns trainingData and testingData (in that order), where the arguments...
 
