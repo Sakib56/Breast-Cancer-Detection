@@ -25,6 +25,30 @@ This will:
 * test KNN on the testing set given the training set
 * outputing the average accuracy
 
+Alternatively, you can open a terminal in the directory and just import the relevant modules and run the methods.
+For example:
+```python
+python
+Python 3.6.5 (v3.6.5:f59c0932b4, Mar 28 2018, 17:00:18) [MSC v.1900 64 bit (AMD64)] on win32
+Type "help", "copyright", "credits" or "license" for more information.
+>>>
+>>> import knn
+>>> import cancer
+>>>
+>>> dataset = cancer.loadData()
+>>> trainingData, testingData = cancer.crossValidate(dataset, trainSize=0.65)
+>>>
+>>> k = 7
+>>> knn = knn.KNearestNeighbour()
+>>> score = 100*knn.getScore(trainingData, testingData, k)
+>>>
+>>> print("average accuracy: {0:.5f}%".format(score))
+>>>
+>>> accuracy for M diagnosis: 91.33%
+>>> accuracy for B diagnosis: 96.80%
+>>> average accuracy: 94.06500%
+```
+
 *Feel free to remove this code and mess around with the methods!*
 
 ## cancer.py
