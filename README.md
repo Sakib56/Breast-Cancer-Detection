@@ -20,10 +20,10 @@ print("average accuracy: {0:.5f}%".format(score))
 ```
 This will:
 * load the dataset from data.csv
-* cross validate the data, creating a training and testing set
+* cross validate the data, splitting into a training and testing set
 * initialise a new KNN model 
 * test KNN on the testing set given the training set
-* outputing the average accuracy
+* output the average accuracy (for both benign/malignant)
 
 Alternatively, you can open a terminal in the directory and just import the relevant modules and run the methods.
 For example:
