@@ -66,9 +66,9 @@ dataset = loadData()
 ```
 
 #### Cross Validating the Data
-As I have a finite dataset to work with, I cannot use all of the dataset to "train" KNN, instead I will cross-validate. This is essentially shuffling the data and splitting into two groups, one for training purposes and another for testing. Think of it like a studying a past paper versus doing a final exam.
+As I have a finite dataset to work with, I cannot use all of the dataset to "train" KNN, instead I will cross-validate. This is essentially shuffling the data and splitting into two groups, one for training purposes and another for testing.
 
-The reason this is done is because if I used all the dataset to train and test my model, it would get a higher accuracy compared to unseen data points (as there will always be one training point exactly on the testing point) ... You wouldn't give your student a final exam which was the same as a past paper.
+The reason this is done is because if I used all the dataset to train and test my model, it would get a higher accuracy compared to unseen data points (as there will always be one training point exactly on the testing point)... You wouldn't give your student a final exam which was the same as a past paper.
 
 **crossValidate(data, trainSize=0.8)** is used to do this cross-validation, which returns trainingData and testingData (in that order), where the arguments...
 
@@ -110,7 +110,7 @@ From doing this and collating the results, I have concluded that the best result
 
 ## knn.py
 #### Predicting a new sample given data
-**knn.predict(data, sample, k=n)** is used to predict what class (benign/malignant) *sample*m will be, based on *data* - the other data points around it. where the arguments...
+**knn.predict(data, sample, k=n)** is used to predict what class (benign/malignant) *sample* will be, based on *data* - the other data points around it. where the arguments...
 
 *data* is the training data, a matrix of row vectors which are the datapoints (n by m),
 
