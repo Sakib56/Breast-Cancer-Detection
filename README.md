@@ -18,12 +18,6 @@ score = 100*knn.getScore(trainingData, testingData, k)
 
 print("average accuracy: {0:.5f}%".format(score))
 ```
-This will:
-* load the dataset from data.csv
-* cross validate the data, splitting into a training and testing set
-* initialise a new KNN model 
-* test KNN on the testing set given the training set
-* output the average accuracy (for both benign/malignant)
 
 Alternatively, you can open a terminal in the directory and just import the relevant modules and run the methods.
 For example:
@@ -48,6 +42,13 @@ Type "help", "copyright", "credits" or "license" for more information.
 "accuracy for B diagnosis: 96.80%"
 "average accuracy: 94.06500%"
 ```
+
+This will:
+* load the dataset from data.csv
+* cross validate the data, splitting into a training and testing set
+* initialise a new KNN model 
+* test KNN on the testing set given the training set
+* output the average accuracy (for both benign/malignant)
 
 ###### *Feel free to remove this code and mess around with the methods!*
 
