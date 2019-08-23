@@ -1,6 +1,6 @@
 # Breast Cancer Detection w/ K-Nearest Neighbours
 
-This is my approach at implementing **KNN from scratch** and applying it to the **Breast Cancer Wisconsin (Diagnostic) dataset**, provided by the [UCI Machine Learning Repository](https://archive.ics.uci.edu/ml/datasets/Breast+Cancer+Wisconsin+%28Diagnostic%29)
+This is my approach at implementing **K-Nearest Neighbours from scratch** and applying it to the **Breast Cancer Wisconsin (Diagnostic) dataset**, provided by the [UCI Machine Learning Repository](https://archive.ics.uci.edu/ml/datasets/Breast+Cancer+Wisconsin+%28Diagnostic%29)
 
 ## How do I use this Repo?
 Simple. Just clone the repo into a folder, open a terminal in that directory and run
